@@ -9,9 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import com.example.homework12.databinding.FragmentSearchBinding
 
-class Search : Fragment() {
+class Search : Fragment(), Getters {
 
     private var binding: FragmentSearchBinding? = null
     override fun onCreateView(
@@ -25,21 +26,10 @@ class Search : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding!!.search.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                return
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                return
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                val recycler = this@Search.getRecyclerView()
-                (recycler?.adapter as Adapter).submitList(this@Search.getList()?.filter { it.name.contains(p0.toString()) })
-            }
-
-        })
+        binding!!.search.doOnTextChanged { text , _, _,_->
+            val recycler = this@Search.getRecyclerView()
+            (recycler?.adapter as Adapter).submitList(this@Search.getList()?.filter { it.name.contains(text.toString()) })
+        }
     }
 
     override fun onDestroyView() {

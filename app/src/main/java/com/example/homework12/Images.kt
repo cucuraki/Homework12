@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.homework12.databinding.FragmentImagesBinding
 
-class Images : Fragment() {
+class Images : Fragment(), Setter {
     private var binding: FragmentImagesBinding? = null
     private lateinit var adapter: Adapter
 

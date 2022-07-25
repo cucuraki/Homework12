@@ -6,11 +6,31 @@ import androidx.recyclerview.widget.RecyclerView
 
 private lateinit var recyclerView: RecyclerView
 private lateinit var list: MutableList<Image>
-fun Fragment.setRecyclerViewAndList(recyclerView1: RecyclerView, list1: MutableList<Image>) {
+
+interface Getters{
+    fun getList(): MutableList<Image>? = if (::list.isInitialized) list else null
+    fun getRecyclerView(): RecyclerView? =
+        if (::recyclerView.isInitialized) {
+            recyclerView
+        } else {
+            null
+        }
+}
+
+interface Setter{
+    fun setRecyclerViewAndList(recyclerView1: RecyclerView, list1: MutableList<Image>) {
+        recyclerView = recyclerView1
+        list = list1
+    }
+}
+
+
+
+
+/*fun Fragment.setRecyclerViewAndList(recyclerView1: RecyclerView, list1: MutableList<Image>) {
     recyclerView = recyclerView1
     list = list1
 }
-
 fun Fragment.getRecyclerView(): RecyclerView? =
     if (::recyclerView.isInitialized) {
         recyclerView
@@ -20,3 +40,4 @@ fun Fragment.getRecyclerView(): RecyclerView? =
 
 fun Fragment.getList(): MutableList<Image>? =
     if (::list.isInitialized) list else null
+*/
